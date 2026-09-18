@@ -1,0 +1,44 @@
+<!DOCTYPE html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>MLB Edge · 적중 추적</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans+KR:wght@400;500;600;700&display=swap"><style>
+:root{--ground:#F4F5F2;--paper:#FFFFFF;--ink:#151A21;--ink2:#3C4552;--muted:#6B7480;--rule:#DDE1E6;--rule2:#EEF0F3;
+--navy:#16305C;--navy-soft:#E4EAF5;--red:#C8102E;--red-soft:#FBE7EA;--amber:#B7791F;--amber-soft:#FBF1DC;--green:#1E7650;--green-soft:#E3F2EA;
+--sans:"IBM Plex Sans KR","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;--mono:"IBM Plex Mono",ui-monospace,Consolas,monospace;--disp:"Barlow Condensed","IBM Plex Sans KR",sans-serif}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--ground:#0F1318;--paper:#171C23;--ink:#E7EBF0;--ink2:#C2C9D3;--muted:#8F99A6;--rule:#2A323D;--rule2:#1F262F;--navy:#9DB6E6;--navy-soft:#1C2A44;--red:#FF6B7A;--red-soft:#3A1A20;--amber:#F0C066;--amber-soft:#3A2E14;--green:#6BCB9B;--green-soft:#173026}}
+:root[data-theme="dark"]{--ground:#0F1318;--paper:#171C23;--ink:#E7EBF0;--ink2:#C2C9D3;--muted:#8F99A6;--rule:#2A323D;--rule2:#1F262F;--navy:#9DB6E6;--navy-soft:#1C2A44;--red:#FF6B7A;--red-soft:#3A1A20;--amber:#F0C066;--amber-soft:#3A2E14;--green:#6BCB9B;--green-soft:#173026}
+*{box-sizing:border-box}html,body{margin:0}body{background:var(--ground);color:var(--ink);font-family:var(--sans);font-size:14px;line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:inherit}.wrap{max-width:1080px;margin:0 auto;padding:20px 18px 60px}
+header{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap;padding-bottom:14px;border-bottom:2px solid var(--ink)}
+.brand{font-family:var(--disp);font-size:34px;font-weight:700;letter-spacing:.02em;line-height:1}.brand small{font-family:var(--sans);font-size:12px;font-weight:500;color:var(--muted);margin-left:10px;letter-spacing:.06em}
+nav.top{display:flex;gap:6px;flex-wrap:wrap}nav.top a{font-size:13px;padding:6px 12px;border:1px solid var(--rule);border-radius:999px;text-decoration:none;color:var(--ink2);background:var(--paper)}nav.top a.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+.dates{display:flex;gap:6px;flex-wrap:wrap;margin:16px 0 6px}.dates button{font-family:var(--mono);font-size:13px;padding:6px 10px;border:1px solid var(--rule);background:var(--paper);color:var(--ink2);border-radius:6px;cursor:pointer}.dates button.on{background:var(--navy);border-color:var(--navy);color:#fff}
+.meta{font-size:12px;color:var(--muted);margin:2px 0 14px}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:0 0 18px}
+.tile{background:var(--paper);border:1px solid var(--rule);border-radius:8px;padding:12px 14px}.tile .k{font-size:11.5px;color:var(--muted);letter-spacing:.04em}.tile .v{font-family:var(--disp);font-size:30px;font-weight:700;line-height:1.1;margin-top:2px}.tile .s{font-size:12px;color:var(--ink2)}
+.legend{font-size:12px;color:var(--muted);display:flex;gap:14px;flex-wrap:wrap;margin:0 0 10px}
+.game{background:var(--paper);border:1px solid var(--rule);border-radius:8px;margin-bottom:8px;overflow:hidden}
+.row{display:grid;grid-template-columns:56px minmax(210px,1.4fr) 128px 128px 118px 96px 62px 92px;gap:10px;align-items:center;padding:11px 14px;cursor:pointer}
+.hdr{display:grid;grid-template-columns:56px minmax(210px,1.4fr) 128px 128px 118px 96px 62px 92px;gap:10px;padding:6px 14px;font-size:11.5px;color:var(--muted);letter-spacing:.03em;font-weight:600}.hdr span.r{text-align:right}
+.pp{font-family:var(--mono);font-size:12.5px;line-height:1.55;white-space:nowrap}.pp b{display:inline-block;min-width:34px;color:var(--ink);font-weight:600}.pp .v{color:var(--ink2)}.pp .fav{color:var(--navy);font-weight:600}
+.row:hover{background:var(--rule2)}
+@media (max-width:860px){.hdr{display:none}.row{grid-template-columns:56px 1fr 1fr;grid-auto-rows:auto}.pp::before{content:attr(data-l);display:block;font-family:var(--sans);font-size:10.5px;color:var(--muted)}}
+.t{font-family:var(--mono);font-size:13px;color:var(--ink2)}.t small{display:block;font-size:10.5px;color:var(--muted)}
+.mu{line-height:1.3}.mu b{font-family:var(--disp);font-size:19px;font-weight:600;letter-spacing:.01em}.mu .at{color:var(--muted);margin:0 6px;font-weight:400}.mu .sp{font-size:12px;color:var(--ink2)}.mu .sp em{font-style:normal;color:var(--muted)}
+.bars{display:grid;gap:5px}.bar{display:grid;grid-template-columns:34px 1fr 46px;gap:8px;align-items:center;font-size:12px}.bar .lb{color:var(--muted)}.bar .tr{height:9px;background:var(--rule2);border-radius:4px;overflow:hidden;position:relative}.bar .fl{height:100%;border-radius:4px}.bar.model .fl{background:var(--navy)}.bar.mkt .fl{background:var(--muted);opacity:.55}.bar .v{font-family:var(--mono);text-align:right}
+.bar .tick{position:absolute;top:-2px;bottom:-2px;width:2px;background:var(--red);opacity:.9}
+.odds{font-family:var(--mono);font-size:12.5px;line-height:1.5;color:var(--ink2)}.odds b{color:var(--ink);font-weight:600}.odds .imp{color:var(--muted)}
+.edge{font-family:var(--mono);font-size:12.5px;text-align:right;line-height:1.4}.edge b{font-weight:600;color:var(--ink)}.edge small{display:block;font-size:10.5px;color:var(--muted);font-family:var(--sans)}
+.p1{font-family:var(--mono);text-align:right}.p1.hi{color:var(--green);font-weight:600}
+.tag{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;font-weight:600;padding:4px 9px;border-radius:999px;white-space:nowrap}
+.tag.t3{background:var(--red-soft);color:var(--red)}.tag.t2{background:var(--amber-soft);color:var(--amber)}.tag.t1{background:var(--navy-soft);color:var(--navy)}.tag.t0{color:var(--muted);background:var(--rule2)}
+.detail{display:none;border-top:1px solid var(--rule);padding:14px 16px 16px;background:var(--rule2)}.game.open .detail{display:grid;grid-template-columns:1.4fr 1fr;gap:20px}@media (max-width:860px){.game.open .detail{grid-template-columns:1fr}}
+.detail h4{margin:0 0 8px;font-size:12px;letter-spacing:.06em;color:var(--muted)}.detail ul{margin:0;padding-left:16px;font-size:13px;color:var(--ink2)}.detail li{margin-bottom:6px}
+.contrib{display:grid;gap:6px;font-size:12px}.contrib .c{display:grid;grid-template-columns:120px 1fr 44px;gap:8px;align-items:center}.contrib .c .tr{height:8px;background:var(--rule);border-radius:3px;position:relative}.contrib .c .fl{position:absolute;top:0;height:100%;border-radius:3px}.contrib .c .fl.pos{background:var(--navy);left:50%}.contrib .c .fl.neg{background:var(--red);right:50%}.contrib .c .v{font-family:var(--mono);text-align:right}
+.note{font-size:12px;color:var(--muted);margin:16px 0 0;line-height:1.6}
+table{border-collapse:collapse;width:100%;font-size:13px;background:var(--paper);border:1px solid var(--rule);border-radius:8px;overflow:hidden}th,td{padding:8px 10px;border-bottom:1px solid var(--rule2);text-align:left}th{background:var(--rule2);color:var(--muted);font-weight:600;font-size:12px}td.n,th.n{text-align:right;font-family:var(--mono);font-variant-numeric:tabular-nums}.tw{overflow-x:auto;margin:10px 0 20px}
+h2{font-family:var(--disp);font-size:22px;font-weight:600;margin:22px 0 8px}
+.empty{padding:30px;text-align:center;color:var(--muted);background:var(--paper);border:1px dashed var(--rule);border-radius:8px}
+</style></head>
+<body><div class="wrap"><header><div class="brand">MLB EDGE<small>모델 vs 배당 · 일별 승률 예측</small></div>
+<nav class="top"><a href="index.html" class="">오늘의 예측</a><a href="track.html" class="on">적중 추적</a></nav></header>
+<div class="empty">아직 결과가 확정된 예측이 없습니다. 첫 예측일 경기가 끝나면 이곳에 집계됩니다.</div>
+<p class="note">확률은 자체 모델(팀 전력 · 선발투수 · 타선 매치업 · 최근 흐름, 2026시즌 경기로 회귀 적합) 산출값이고, 배당은 ESPN 제공 DraftKings 머니라인입니다. 내재확률은 마진을 제거한 값입니다. 추천 등급은 모델과 배당의 괴리 크기이며 수익을 보장하지 않습니다. 백테스트에서 시장이 모델보다 소폭 정확했습니다 — 적중 추적 페이지에서 누적 성과를 확인하세요.</p>
+</div></body></html>
